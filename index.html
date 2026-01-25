@@ -194,13 +194,23 @@
             flex-direction: column;
             cursor: pointer;
             gap: 5px;
-            z-index: 101;
+            z-index: 1001;
+            position: relative;
         }
         .hamburger span {
             width: 25px;
             height: 2px;
             background: var(--text-primary);
             transition: 0.3s;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
         }
         .mobile-menu {
             display: none;
@@ -210,11 +220,61 @@
             right: 0;
             bottom: 0;
             background: var(--bg-primary);
-            z-index: 99;
+            z-index: 1000;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             gap: 32px;
+            overflow: hidden;
+        }
+        .mobile-menu::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: var(--accent-rose);
+            border-radius: 50%;
+            top: 10%;
+            left: -50px;
+            opacity: 0.4;
+            animation: floatBubble 8s ease-in-out infinite;
+        }
+        .mobile-menu::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: var(--accent-sage);
+            border-radius: 50%;
+            bottom: 15%;
+            right: -30px;
+            opacity: 0.4;
+            animation: floatBubble 6s ease-in-out infinite reverse;
+        }
+        @keyframes floatBubble {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.05); }
+        }
+        .mobile-menu .menu-bubble {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+        .mobile-menu .menu-bubble:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            background: var(--accent-sage);
+            top: 30%;
+            right: 20%;
+            animation: floatBubble 7s ease-in-out infinite;
+        }
+        .mobile-menu .menu-bubble:nth-child(2) {
+            width: 80px;
+            height: 80px;
+            background: var(--accent-rose);
+            bottom: 30%;
+            left: 15%;
+            animation: floatBubble 9s ease-in-out infinite reverse;
         }
         .mobile-menu.active {
             display: flex;
@@ -224,6 +284,8 @@
             text-decoration: none;
             font-size: 24px;
             transition: color 0.3s ease;
+            position: relative;
+            z-index: 1;
         }
         .mobile-menu a:hover {
             color: var(--accent-rose);
@@ -1427,6 +1489,8 @@
         
         <!-- Mobile Menu -->
         <div class="mobile-menu" id="mobileMenu">
+            <div class="menu-bubble"></div>
+            <div class="menu-bubble"></div>
             <a href="index.html" onclick="toggleMenu()">home</a>
             <a href="contact.html" onclick="toggleMenu()">contact</a>
             <a href="#download" onclick="toggleMenu()">download</a>
@@ -1947,6 +2011,7 @@
         // Mobile menu toggle
         function toggleMenu() {
             document.getElementById('mobileMenu').classList.toggle('active');
+            document.querySelector('.hamburger').classList.toggle('active');
         }
 
         // Cookie consent banner
