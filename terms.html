@@ -38,7 +38,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 100;
+            z-index: 1002;
             background: rgba(250, 248, 245, 0.9);
             backdrop-filter: blur(20px);
         }
@@ -63,8 +63,11 @@
         .nav-cta:hover { background: #d9aeae; }
         
         /* Hamburger Menu */
-        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
-        .hamburger span { width: 25px; height: 2px; background: var(--text-primary); transition: 0.3s; }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; z-index: 1001; position: relative; }
+        .hamburger span { display: block; width: 25px; height: 2px; background: var(--text-primary); transition: 0.3s; }
+        .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
         .mobile-menu {
             display: none;
             position: fixed;
@@ -73,12 +76,42 @@
             right: 0;
             bottom: 0;
             background: var(--bg-primary);
-            z-index: 99;
+            z-index: 1000;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             gap: 32px;
+            overflow: hidden;
         }
+        .mobile-menu::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: var(--accent-rose);
+            border-radius: 50%;
+            top: 10%;
+            left: -50px;
+            opacity: 0.4;
+            animation: floatBubble 8s ease-in-out infinite;
+        }
+        .mobile-menu::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: var(--accent-sage);
+            border-radius: 50%;
+            bottom: 15%;
+            right: -30px;
+            opacity: 0.4;
+            animation: floatBubble 6s ease-in-out infinite reverse;
+        }
+        @keyframes floatBubble {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.05); }
+        }
+        .mobile-menu a { position: relative; z-index: 1; }
         .mobile-menu.active { display: flex; }
         .mobile-menu a {
             color: var(--text-primary);
@@ -133,7 +166,7 @@
 </head>
 <body>
     <header>
-        <a href="index.html" class="logo"><img src="data:image/png;base64,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" alt="LetGo" style="height: 67px;"></a>
+        <a href="index.html" class="logo"><img src="logo.png" alt="LetGo" style="height: 67px;"></a>
         <nav class="nav-links">
             <a href="index.html" class="nav-link">home</a>
             <a href="contact.html" class="nav-link">contact</a>
@@ -211,7 +244,7 @@
 
         <h2>13. Contact Information</h2>
         <p>For questions about these Terms of Service, please contact us at:</p>
-        <p><a href="mailto:legal@letgo-app.com">legal@letgo-app.com</a></p>
+        <p><a href="/cdn-cgi/l/email-protection#5c30393b3d301c3039283b33713d2c2c723f3331"><span class="__cf_email__" data-cfemail="83efe6e4e2efc3efe6f7e4ecaee2f3f3ade0ecee">[email&#160;protected]</span></a></p>
     </main>
 
     <footer>
@@ -226,6 +259,7 @@
     <script>
         function toggleMenu() {
             document.getElementById('mobileMenu').classList.toggle('active');
+            document.querySelector('.hamburger').classList.toggle('active');
         }
     </script>
 </body>

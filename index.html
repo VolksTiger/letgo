@@ -113,7 +113,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 100;
+            z-index: 1002;
             background: transparent;
             transition: all 0.4s ease;
         }
@@ -198,19 +198,20 @@
             position: relative;
         }
         .hamburger span {
+            display: block;
             width: 25px;
             height: 2px;
             background: var(--text-primary);
             transition: 0.3s;
         }
         .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
+            transform: translateY(7px) rotate(45deg);
         }
         .hamburger.active span:nth-child(2) {
             opacity: 0;
         }
         .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
+            transform: translateY(-7px) rotate(-45deg);
         }
         .mobile-menu {
             display: none;
@@ -1807,6 +1808,12 @@
     </div>
 
     <script>
+        // Mobile menu toggle - MUST BE FIRST
+        function toggleMenu() {
+            document.getElementById('mobileMenu').classList.toggle('active');
+            document.querySelector('.hamburger').classList.toggle('active');
+        }
+
         // Create ambient floating particles
         function createAmbientParticles() {
             const container = document.getElementById('ambientParticles');
@@ -2008,19 +2015,14 @@
             });
         });
 
-        // Mobile menu toggle
-        function toggleMenu() {
-            document.getElementById('mobileMenu').classList.toggle('active');
-            document.querySelector('.hamburger').classList.toggle('active');
-        }
-
         // Cookie consent banner
-        (function() {
+        document.addEventListener('DOMContentLoaded', function() {
             var cookieConsent = localStorage.getItem('cookieConsent');
             if (!cookieConsent) {
-                document.getElementById('cookieBanner').classList.add('show');
+                var banner = document.getElementById('cookieBanner');
+                if (banner) banner.classList.add('show');
             }
-        })();
+        });
 
         function acceptCookies() {
             localStorage.setItem('cookieConsent', 'accepted');

@@ -38,7 +38,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 100;
+            z-index: 1002;
             background: rgba(250, 248, 245, 0.9);
             backdrop-filter: blur(20px);
         }
@@ -63,8 +63,11 @@
         .nav-cta:hover { background: #d9aeae; }
         
         /* Hamburger Menu */
-        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
-        .hamburger span { width: 25px; height: 2px; background: var(--text-primary); transition: 0.3s; }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; z-index: 1001; position: relative; }
+        .hamburger span { display: block; width: 25px; height: 2px; background: var(--text-primary); transition: 0.3s; }
+        .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
         .mobile-menu {
             display: none;
             position: fixed;
@@ -73,12 +76,42 @@
             right: 0;
             bottom: 0;
             background: var(--bg-primary);
-            z-index: 99;
+            z-index: 1000;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             gap: 32px;
+            overflow: hidden;
         }
+        .mobile-menu::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: var(--accent-rose);
+            border-radius: 50%;
+            top: 10%;
+            left: -50px;
+            opacity: 0.4;
+            animation: floatBubble 8s ease-in-out infinite;
+        }
+        .mobile-menu::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: var(--accent-sage);
+            border-radius: 50%;
+            bottom: 15%;
+            right: -30px;
+            opacity: 0.4;
+            animation: floatBubble 6s ease-in-out infinite reverse;
+        }
+        @keyframes floatBubble {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.05); }
+        }
+        .mobile-menu a { position: relative; z-index: 1; }
         .mobile-menu.active { display: flex; }
         .mobile-menu a {
             color: var(--text-primary);
@@ -181,7 +214,7 @@
 </head>
 <body>
     <header>
-        <a href="index.html" class="logo"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAABCGlDQ1BJQ0MgUHJvZmlsZQAAeJxjYGA8wQAELAYMDLl5JUVB7k4KEZFRCuwPGBiBEAwSk4sLGHADoKpv1yBqL+viUYcLcKakFicD6Q9ArFIEtBxopAiQLZIOYWuA2EkQtg2IXV5SUAJkB4DYRSFBzkB2CpCtkY7ETkJiJxcUgdT3ANk2uTmlyQh3M/Ck5oUGA2kOIJZhKGYIYnBncAL5H6IkfxEDg8VXBgbmCQixpJkMDNtbGRgkbiHEVBYwMPC3MDBsO48QQ4RJQWJRIliIBYiZ0tIYGD4tZ2DgjWRgEL7AwMAVDQsIHG5TALvNnSEfCNMZchhSgSKeDHkMyQx6QJYRgwGDIYMZAKbWPz9HbOBQAAAsxElEQVR4nO3dd3gU1foH8O85M7ub3kkhQCAJLaEHCE226UpX2IBcRQQFe7nyu96ryOxiQa967XoRUFCuyK5YQECkJAGpIYRAEgihpZCEUJKQvjsz5/dHdgEVENJo5/M8ax5Ddnd2dt857+kAx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3Ecx3EcxyySAPWwt/4V/JZ7l5+dL9dXVz19pbVUP7tqVPd9hRMRm2GcAoCiKuFDHAgBwzllXV5e5bs0alux0HjEs60/GGADQvc50XRcBgDFGAIhzLsTZUGVV5Xrn6mWZcd/mJ2Z4/fKFR6+dO3d+jp+nb1ZaWrrE7Xbb4219Pl9y5QHfdkVRxIU6l+IXoaHhBIeYZL8jDAwMaK6pSR0Khze+kJf3tCsxMfReQ8O5N4o9LWGY36s7S67X1tZ+DoAMMjaP0mhPMBg02VQI50OIXySYNsJkaAEAwaAuMICys7M1p8u1sq+//+eoYbx+obs77EiULRa1Lo3d/usbTdOsioqKJzAxPnj6+OnhqbTQfd7mEzBuGIwBFudcQDAoqKpqHuc8OTU5efNPAwNXhsPhq/vr618CQNbERCgajQ7t3Xt4yOv1pjAzmnHixKnrnHNB0zRL1/UFpeEuAYkpKSZjLEnTNIupqqkfPZoiWUa+JIqszONZf6i+fvCjffsmi1AQlthkyQkAIhl5NtnVCwCaplkAoKqqyeKiORvTNZAPSD29vU/lbtoUDtTVeQzDiK7IyHgxHRk/j0Qi++ySVHf55Mlnf+zruwagc2Qs8m2qa+ltRXnlMZskDH7c2BiqqijPkmXX2sycdUlpGSvWiom2QMn2kpsEinUNwxypYeXl5Q4AaOLc2cS5U+c8IV7gZ8eOrYzZAoDH43EdqHxzGzA5RRVFSfB6vTZd18VPz+vewNnAHgDQdX36HCK6K+r3q5iheGmq12NwzgUiYgd37y70+XzJsxW8r9r3COJatKmlKWNO5/PAALDY4HnnLe+TB/bs2TC1J+pzTL/GU82F/sOHtra2na0IXvriQ0VRxNg5Dzq3GQCqqaxcIgK5HzQ3d7Zw7li1Juv97v5fj9TW1kYZY1RWVrZ6S8GWzEgkEnGmLY2mLUt799XCl3cCwJdXL12YMKy24q3uFp1InDsf90BE4JwLIsw8SZJ6OOfC36EQS09LKynIydnIGKP29nY7EY0tX7G8OOvxrNeYbEuSk+QUYGqMW9SR4LA9AwDpAFuwACJijDGKDAysM8bNAa2xMVQACG83NIyGwpEqSbbXnz9zZm1RUVE0EAjckhPtgy6Xa2Jg/MYPlmVlfXIxuEFVVTM0El4VHhr5GgBuBoMLfCzicLvd9o6Ojiim0hEbPO2BQF5kIlrwx61bN367OTic+1zeNlF2fFeyo/ir4MW2gnHT2vHLjb4uh1Mer67Y3xm70IP6ny0605H0+/2y3++X47anL8k5d/wvDmcUwblAdKddiUiICSMiIdaq/J6WXmSRRR46/wDC2dw/5EFKwwAAAABJRU5ErkJggg==" alt="LetGo" style="height: 67px;"></a>
+        <a href="index.html" class="logo"><img src="logo.png" alt="LetGo" style="height: 67px;"></a>
         <nav class="nav-links">
             <a href="index.html" class="nav-link">home</a>
             <a href="contact.html" class="nav-link">contact</a>
@@ -208,50 +241,50 @@
             <div class="contact-card">
                 <h3>General Inquiries</h3>
                 <p>Questions about LetGo? We're here to help.</p>
-                <a href="mailto:hello@letgo-app.com">
+                <a href="/cdn-cgi/l/email-protection#234b464f4f4c634f4657444c0e4253530d404c4e">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                         <polyline points="22,6 12,13 2,6"/>
                     </svg>
-                    hello@letgo-app.com
+                    <span class="__cf_email__" data-cfemail="f79f929b9b98b79b92839098da968787d994989a">[email&#160;protected]</span>
                 </a>
             </div>
 
             <div class="contact-card">
                 <h3>Support</h3>
                 <p>Having issues with the app? Let us know.</p>
-                <a href="mailto:support@letgo-app.com">
+                <a href="/cdn-cgi/l/email-protection#4635333636293432062a233221296b2736366825292b">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="10"/>
                         <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
                         <line x1="12" y1="17" x2="12.01" y2="17"/>
                     </svg>
-                    support@letgo-app.com
+                    <span class="__cf_email__" data-cfemail="2d5e585d5d425f596d4148594a42004c5d5d034e4240">[email&#160;protected]</span>
                 </a>
             </div>
 
             <div class="contact-card">
                 <h3>Press & Partnerships</h3>
                 <p>Media inquiries and collaboration opportunities.</p>
-                <a href="mailto:press@letgo-app.com">
+                <a href="/cdn-cgi/l/email-protection#2d5d5f485e5e6d4148594a42004c5d5d034e4240">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                         <circle cx="9" cy="7" r="4"/>
                         <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
                         <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                     </svg>
-                    press@letgo-app.com
+                    <span class="__cf_email__" data-cfemail="522220372121123e3726353d7f3322227c313d3f">[email&#160;protected]</span>
                 </a>
             </div>
 
             <div class="contact-card">
                 <h3>Privacy Concerns</h3>
                 <p>Questions about your data and privacy.</p>
-                <a href="mailto:privacy@letgo-app.com">
+                <a href="/cdn-cgi/l/email-protection#6313110a1502001a230f0617040c4e0213134d000c0e">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                     </svg>
-                    privacy@letgo-app.com
+                    <span class="__cf_email__" data-cfemail="cfbfbda6b9aeacb68fa3aabba8a0e2aebfbfe1aca0a2">[email&#160;protected]</span>
                 </a>
             </div>
         </div>
@@ -268,7 +301,7 @@
             </a>
             <a href="#" title="Twitter">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.08 0 0 1-.1 0z"/>
                 </svg>
             </a>
         </div>
@@ -286,6 +319,7 @@
     <script>
         function toggleMenu() {
             document.getElementById('mobileMenu').classList.toggle('active');
+            document.querySelector('.hamburger').classList.toggle('active');
         }
     </script>
 </body>
