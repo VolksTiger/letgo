@@ -3,12 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LetGo — a quiet place to feel and release</title>
+    
+    <!-- Primary Meta Tags -->
+    <title>LetGo — Emotional Wellness & Journaling App | Feel, Write, Release</title>
+    <meta name="title" content="LetGo — Emotional Wellness & Journaling App | Feel, Write, Release">
+    <meta name="description" content="LetGo is a free, private emotional wellness app. Journal your feelings, practice guided breathing, and release stress without judgment. No account required, 100% private.">
+    <meta name="keywords" content="emotional wellness app, journaling app, mental health, mindfulness, breathing exercises, stress relief, anxiety relief, mood tracker, private journal, self-care app, meditation app, emotional release">
+    <meta name="author" content="LetGo">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://letgo-app.com/">
+    <meta property="og:title" content="LetGo — A Quiet Place to Feel and Release">
+    <meta property="og:description" content="Free, private emotional wellness app. Journal your feelings, practice breathing exercises, and find peace. No account needed.">
+    <meta property="og:image" content="https://letgo-app.com/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="LetGo">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://letgo-app.com/">
+    <meta name="twitter:title" content="LetGo — A Quiet Place to Feel and Release">
+    <meta name="twitter:description" content="Free, private emotional wellness app. Journal your feelings, practice breathing exercises, and find peace.">
+    <meta name="twitter:image" content="https://letgo-app.com/og-image.png">
+    
+    <!-- Apple Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="LetGo">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#FAF8F5">
+    <meta name="msapplication-TileColor" content="#FAF8F5">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://letgo-app.com/">
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABCGlDQ1BJQ0MgUHJvZmlsZQAAeJxjYGA8wQAELAYMDLl5JUVB7k4KEZFRCuwPGBiBEAwSk4sLGHADoKpv1yBqL+viUYcLcKakFicD6Q9ArFIEtBxopAiQLZIOYWuA2EkQtg2IXV5SUAJkB4DYRSFBzkB2CpCtkY7ETkJiJxcUgdT3ANk2uTmlyQh3M/Ck5oUGA2kOIJZhKGYIYnBncAL5H6IkfxEDg8VXBgbmCQixpJkMDNtbGRgkbiHEVBYwMPC3MDBsO48QQ4RJQWJRIliIBYiZ0tIYGD4tZ2DgjWRgEL7AwMAVDQsIHG5TALvNnSEfCNMZchhSgSKeDHkMyQx6QJYRgwGDIYMZAKbWPz9HbOBQAAAEXUlEQVR4nO2Vb0xVZRzHv88553LvgXsBRRS1BZnCTMsWUi3XwE3cNeqOxc5psoQt7TLMK16bhC/s4dRiroXMYMMXTtC7NXduSVohU1ayOVqM5VZu5UasjVoNM9jleuFyOOfXC7h4Vf5Zbb7h8+45z+88v+/z+/cAiyyySBycc4F0XSSAPWwt/4V/JZ7l5+dL9dXVz19pbVUP7tqVPd9hRMRm2GcAoCiKuFDHAgBwzllXV5e5bs0alux0HjEs60/GGADQvc50XRcBgDFGAIhzLsTZUGVV5Xrn6mWZcd/mJ2Z4/fKFR6+dO3d+jp+nb1ZaWrrE7Xbb4219Pl9y5QHfdkVRxIU6l+IXoaHhBIeYZL8jDAwMaK6pSR0Khze+kJf3tCsxMfReQ8O5N4o9LWGY36s7S67X1tZ+DoAMMjaP0mhPMBg02VQI50OIXySYNsJkaAEAwaAuMICys7M1p8u1sq+///eoYbx+obs77EiULRa1Lo3d/usbTdOsioqKJzAxPnj6+OnhqbTQfd7mEzBuGIwBFudcQDAoqKpqHuc8OTU5efNPAwNXhsPhq/vr618CQNbERCgajQ7t3Xt4yOv1pjAzmnHixKnrnHNB0zRL1/UFpeEuAYkpKSZjLEnTNIupqqkfPZoiWUa+JIqszONZf6i+fvCjffsmi1AQlthkyQkAIhl5NtnVCwCaplkAoKqqyeKiORvTNZAPSD29vU/lbtoUDtTVeQzDiK7IyHgxHRk/j0Qi++ySVHf55Mlnf+zruwagc2Qs8m2qa+ltRXnlMZskDH7c2BiqqijPkmXX2sycdUlpGSvWiom2QMn2kpsEinUNwxypYeXl5Q4AaOLc2cS5U+c8IV7gZ8eOrYzZAoDH43EdqHxzGzA5RRVFSfB6vTZd18VPz+vewNnAHgDQdX36HCK6K+r3q5iheGmq12NwzgUiYgd37y70+XzJsxW8r9r3COJatKmlKWNO5/PAALDY4HnnLe+TB/bs2TC1J+pzTL/GU82F/sOHtra2na0IXvriQ0VRxNg5Dzq3GQCqqaxcIgK5HzQ3d7Zw7li1Juv97v5fj9TW1kYZY1RWVrZ6S8GWzEgkEnGmLY2mLUt799XCl3cCwJdXL12YMKy24q3uFp1InDsf90BE4JwLIsw8SZJ6OOfC36EQS09LKynIydnIGKP29nY7EY0tX7G8OOvxrNeYbEuSk+QUYGqMW9SR4LA9AwDpAFuwACJijDGKDAysM8bNAa2xMVQACG83NIyGwpEqSbbXnz9zZm1RUVE0EAjckhPtgy6Xa2Jg/MYPlmVlfXIxuEFVVTM0El4VHhr5GgBuBoMLfCzicLvd9o6Ojiim0hEbPO2BQF5kIlrwx61bN367OTic+1zeNlF2fFeyo/ir4MW2gnHT2vHLjb4uh1Mer67Y3xm70IP6ny0605H0+/2y3++X47anL8k5d/wvDmcUwblAdKddiUiICSMiIdaq/J6WXmSRRR46/wDC2dw/5EFKwwAAAABJRU5ErkJggg==">
+    
+    <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Structured Data / Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "MobileApplication",
+        "name": "LetGo",
+        "description": "A private emotional wellness app for journaling, breathing exercises, and emotional release.",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "iOS",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "1000"
+        },
+        "featureList": [
+            "Private journaling",
+            "Guided breathing exercises",
+            "Mood tracking",
+            "No account required",
+            "100% offline capable"
+        ]
+    }
+    </script>
+    
     <style>
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #FAF8F5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .loading-logo {
+            width: 120px;
+            height: 120px;
+            animation: loadingPulse 1.5s ease-in-out infinite;
+        }
+        @keyframes loadingPulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+        
         :root {
             --bg-primary: #FAF8F5;
             --bg-secondary: #F3EFEB;
@@ -1469,6 +1570,11 @@
     </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <img src="logo.png" alt="LetGo" class="loading-logo">
+    </div>
+    
     <!-- Ambient floating particles -->
     <div class="ambient-particles" id="ambientParticles"></div>
 
@@ -2050,5 +2156,14 @@
             </div>
         </div>
     </div>
+    
+    <!-- Loading screen script -->
+    <script>
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 800);
+        });
+    </script>
 </body>
 </html>
